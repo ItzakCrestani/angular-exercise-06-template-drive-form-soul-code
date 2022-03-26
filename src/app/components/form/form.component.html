@@ -1,0 +1,251 @@
+<mat-card>
+  <mat-card-header>
+    <h2 style="margin: 0 0 0 -1.875rem; padding: 2rem;">Template Driven Form Project</h2>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form action="#">
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="ex: Eduard"
+          [(ngModel)]="name"
+          name="name"
+          #inputName="ngModel"
+          required
+          minlength="1"
+        />
+
+        <mat-error *ngIf="inputName.invalid">
+          <span *ngIf="inputName.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+          <span></span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Sobrenome</mat-label>
+        <input
+          type="text"
+          placeholder="ex: Elric"
+          matInput
+          [(ngModel)]="lastname"
+          name="lastname"
+          #inputLastname="ngModel"
+          required
+          minlength="1"
+        />
+
+        <mat-error *ngIf="inputLastname.invalid">
+          <span *ngIf="inputLastname.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>CPF</mat-label>
+        <input
+          type="text"
+          placeholder="ex: 01010101010"
+          matInput
+          [(ngModel)]="cpf"
+          name="cpf"
+          #inputCPF="ngModel"
+          required
+          minlength="11"
+        />
+
+        <mat-error *ngIf="inputCPF.invalid">
+          <span *ngIf="inputCPF.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+          <span *ngIf="inputCPF.value.length < 11">
+            *Número insuficiente de caracteres
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Telefone</mat-label>
+        <input
+          type="text"
+          placeholder="ex: 11901010101"
+          matInput
+          [(ngModel)]="phoneNumber"
+          name="phoneNumber"
+          #inputPhoneNumber="ngModel"
+          required
+          minlength="10"
+        />
+
+        <button mat-icon-button (click)="addNewPhoneNumber()">
+          <mat-icon>+</mat-icon>
+        </button>
+
+        <mat-error *ngIf="inputPhoneNumber.invalid">
+          <span *ngIf="inputPhoneNumber.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+          <span *ngIf="inputPhoneNumber.value.length < 10">
+            *Número insuficiente de caracteres
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        *ngFor="let phoneNumber of additionalPhoneNumber; index as i"
+      >
+        <mat-label>Telefone adicional {{ i + 1 }}</mat-label>
+        <input
+          type="text"
+          placeholder="ex: 11901010101"
+          matInput
+          [(ngModel)]="phoneNumber.intPhoneNumber"
+          name="additionalPhoneNumber"
+          #inputAdditionalPhoneNumber="ngModel"
+          required
+          minlength="10"
+        />
+
+        <button mat-icon-button (click)="removeNewPhoneNumber(i)">
+          <mat-icon>-</mat-icon>
+        </button>
+
+        <mat-error *ngIf="inputAdditionalPhoneNumber.invalid">
+          <span *ngIf="inputAdditionalPhoneNumber.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+          <span *ngIf="inputAdditionalPhoneNumber.value.length < 10">
+            *Número insuficiente de caracteres
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Endereço</mat-label>
+        <input
+          type="text"
+          placeholder="ex: Av. da Liberdade, 363 - Liberdade, São Paulo - SP"
+          matInput
+          [(ngModel)]="adress"
+          name="adress"
+          #inputAdress="ngModel"
+          required
+          minlength="1"
+        />
+
+        <mat-error *ngIf="inputAdress.invalid">
+          <span *ngIf="inputAdress.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Complemento</mat-label>
+        <input
+          type="text"
+          placeholder="ex: Ap 01"
+          matInput
+          [(ngModel)]="complement"
+          name="complement"
+          #inputComplement="ngModel"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input
+          type="text"
+          placeholder="ex: AlquimistaDeAço"
+          matInput
+          [(ngModel)]="username"
+          name="username"
+          #inputUsername="ngModel"
+          required
+          minlength="1"
+        />
+
+        <mat-error *ngIf="inputUsername.invalid">
+          <span *ngIf="inputUsername.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Senha</mat-label>
+        <input
+          type="password"
+          placeholder="ex: trocaequivalente1"
+          matInput
+          [(ngModel)]="password"
+          name="password"
+          #inputPassword="ngModel"
+          required
+          minlength="8"
+        />
+
+        <mat-error *ngIf="inputPassword.invalid">
+          <span *ngIf="inputPassword.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+          <span
+            *ngIf="inputPassword.value.length < 8 && inputPassword.value.length > 0"
+          >
+            *Mínimo 8 caracteres
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirme sua senha</mat-label>
+        <input
+          type="password"
+          placeholder="Repita a mesma senha do campo acima"
+          matInput
+          [(ngModel)]="passwordConfirmation"
+          name="passwordConfirmation"
+          #inputPasswordConfirmation="ngModel"
+          required
+          minlength="8"
+          [customPasswordValidator]="password"
+        />
+
+        <mat-error *ngIf="inputPasswordConfirmation.invalid">
+          <span *ngIf="inputPasswordConfirmation.value.length == 0">
+            ***Informação obrigatória!
+          </span>
+          <span *ngIf="inputPasswordConfirmation.value.length < 8 && inputPasswordConfirmation.value.length > 0">
+            *Mínimo 8 caracteres
+          </span>
+          <span *ngIf="inputPasswordConfirmation.errors?.['passwordValidationFail']">
+            *As senhas precisam ser idênticas
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      (click)="openDialog()"
+      [disabled]="
+      inputName.invalid ||
+      inputLastname.invalid ||
+      inputCPF.invalid ||
+      inputPhoneNumber.invalid ||
+      inputAdress.invalid ||
+      inputUsername.invalid ||
+      inputPassword.invalid ||
+      inputPasswordConfirmation.invalid"
+    >Enviar</button>
+  </mat-card-actions>
+</mat-card>
